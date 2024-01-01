@@ -3,14 +3,14 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.use((req, res) => {
+app.use((req, res, next) => {
 	console.log('Incoming request…');
-	console.log('Request type: ' + req.method);
-	console.log('The flow will stop here.');
+	console.log(`Requesting server: ${req.hostname}`);
+	next();
 });
 
-app.get('/', (req, res) => {
-	console.log("Did we make it to the `get()` middleware step?");
+app.get('/user/:id', function (req, res, next) {
+	console.log("GET request processing...");
 });
 
 app.listen(port, () => {
