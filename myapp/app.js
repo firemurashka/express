@@ -1,18 +1,15 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const morgan = require('morgan');
+const app = express();
+
 const port = 3000;
 
-app.use(express.json());
+app.use(morgan('tiny'));
 
-function authenticate(req, res) {
-	if (req.body.role === 'Admin') {
-		console.log('Authenticated');
-	} else {
-		console.log('Unauthotized');
-	}
-}
+app.get('/', (req, res) => {
+	res.status(500).send('Request received');
+});
 
-app.use(authenticate);
 app.listen(port, () => {
 	console.log(`The server is listening on port ${port}!`);
 });
